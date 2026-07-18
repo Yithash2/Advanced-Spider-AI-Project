@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class spider_script : MonoBehaviour
 {
     public Species specie;
 
+    [HideInInspector]public bool isAGeneral = false;
     [Header("Steering")]
-    [SerializeField] private float[] pattern;
     [SerializeField] private float speed = 3f;
     [SerializeField] private float steeringSmooth = 0.15f;
     [SerializeField] private float rayDistance = 4f;
@@ -50,12 +51,17 @@ public class spider_script : MonoBehaviour
     private const int RayCount = 16;
     private Vector2[] rayDirections;
     private Vector2 smoothedSteering;
+
+
+    [SerializeField] private Animator animator;
     
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         PrecomputeRayDirections();
+        
+        speed += Random.Range(-speed/4, speed/2);
         
         Vector3 targetPosition = target.position +target.linearVelocity * (Time.deltaTime);
         
@@ -84,61 +90,61 @@ public class spider_script : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 targetPosition = target.position +target.linearVelocity * (Time.deltaTime * refreshSpeed) ;
-        
-        
+
+        if (Mouse.current.leftButton.isPressed)
+        {
+            rb.linearVelocity = Vector2.zero;
+            animator.SetBool("Emoting", true);
+            return;
+        }
+        if (!Mouse.current.rightButton.isPressed)
+        {
+            animator.SetBool("Emoting", false);
+        }
         
         refreshCounter += Time.fixedDeltaTime;
         if (refreshCounter >= refreshSpeed)
         {;
-            if (group == null)
+            if (group == null ||isAGeneral)
             {
+                Vector3 targetPosition = target.position +target.linearVelocity * (Time.deltaTime * refreshSpeed) ;
+                
                 switch (behaviour)
                 {
                     case Behaviour.Attack:
-                        AStarDemandsScheduler.RequestPath(transform.position, targetPosition , OnPathFound);
+                        if (Vector2.Distance(transform.position, target.position) < 0.3f)
+                        {
+                            rb.linearVelocity = Vector2.zero;
+                        }else
+                            AStarDemandsScheduler.RequestPath(transform.position, targetPosition , OnPathFound);
                         break;
                     case Behaviour.Avoid:
-                        AStarDemandsScheduler.RequestStealthyPath(transform.position + (Vector3)rb.linearVelocity * (Time.deltaTime * refreshSpeed), targetPosition ,ennemie, 5, OnPathFound);
+                        AStarDemandsScheduler.RequestStealthyPath(transform.position + (Vector3)rb.linearVelocity * (Time.deltaTime * refreshSpeed), targetPosition ,ennemie, distanceToTarget, OnPathFound);
                         break;
                 }
                
             }
             refreshCounter = 0;
         }
-
-        if (group != null)
-        {
-            if(Vector2.Distance(transform.position, group.GetGroupCenter())> CohesionRadius)
-            {
-                _separationCounter += Time.fixedDeltaTime;
-                if (_separationCounter >= separationTime)
-                    group.RemoveMember(this);
-            }
-            else
-            {
-                _separationCounter = 0;
-            }
-        }
     }
+
 
     public void AddGroup(SpiderGroup group2)
     {
         group = group2;
-        target = null;
+        if(!isAGeneral)
+            target = null;
     }
 
     public SpiderGroup GetGroup()
     {
         return group;
     }
-
     public void RemoveGroup()
     {
         target = group.target;
         group = null;
     }
-
     void PrecomputeRayDirections()
     {
         rayDirections = new Vector2[RayCount];
@@ -150,7 +156,6 @@ public class spider_script : MonoBehaviour
             rayDirections[i] = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
         }
     }
-
     public void OnPathFound(Vector3[] newPath, bool success)
     {
         if (!success || newPath.Length == 0)
@@ -162,16 +167,15 @@ public class spider_script : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(FollowPath());
     }
-
     public void SetGroupPath(Vector3[] groupPath)
     {
         path = groupPath;
         targetIndex = 0;
 
         StopAllCoroutines();
+        rb.linearVelocity = Vector2.zero;
         StartCoroutine(FollowPath( 3f));
     }
-
     public int IsInGroup(SpiderGroup group2)
     {
         if (group == group2)
@@ -182,8 +186,6 @@ public class spider_script : MonoBehaviour
         
         return 1;
     }
-    
-
     IEnumerator FollowPath(float precision = 3f)
     {
         if (path == null || path.Length < 1)
@@ -193,7 +195,13 @@ public class spider_script : MonoBehaviour
         
         while (true)
         {
-            Vector3 toWaypoint = currentWaypoint - (group != null ? group.GetGroupCenter() : transform.position);
+            if (Vector2.Distance(transform.position, target.position) < 0.3f)
+            {
+                rb.linearVelocity = Vector2.zero;
+                yield break;
+            }
+            
+            Vector3 toWaypoint = currentWaypoint -  transform.position;
             float distance = toWaypoint.magnitude;
             
             // Check if waypoint is reached (within threshold OR if we've passed it)
@@ -221,7 +229,6 @@ public class spider_script : MonoBehaviour
             yield return null;
         }
     }
-    
     Vector2 ComputeObstacleAvoidance()
     {
         Vector2 selfPos = transform.position;
@@ -248,7 +255,6 @@ public class spider_script : MonoBehaviour
 
         return avoidance;
     }
-
     Vector2 ComputeFlocking()
     {
         if (group == null || group.MemberCount < 2)
@@ -286,8 +292,6 @@ public class spider_script : MonoBehaviour
 
         return flocking;
     }
-
-
     Vector2 ComputeSteering(Vector3 waypoint)
     {
         Vector2 selfPos = transform.position;
@@ -309,7 +313,7 @@ public class spider_script : MonoBehaviour
             }
 
             float alignment = Mathf.Clamp01(Vector2.Dot(dir, targetDir));
-            float patternBias = pattern[i % pattern.Length];
+            float patternBias = 1;
 
             float weight = alignment * patternBias;
             weights[i] = weight;
@@ -339,10 +343,9 @@ public class spider_script : MonoBehaviour
 
         return smoothedSteering;
     }
-
-
     void ApplySteering(Vector2 steering)
     {
+        
         if (steering.sqrMagnitude > 0.0001f)
         {
             Vector2 desiredVelocity = steering.normalized * speed;
@@ -355,11 +358,10 @@ public class spider_script : MonoBehaviour
         
         rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, speed);
     }
-
     private void OnDrawGizmos()
     {
         if (path == null) return;
-
+        
         Gizmos.color = pathColor;
         for (int i = 0; i < path.Length - 1; i++){
             Gizmos.DrawWireSphere(path[i], 1f);

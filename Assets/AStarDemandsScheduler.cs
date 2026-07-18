@@ -89,7 +89,7 @@ public class AStarDemandsScheduler : MonoBehaviour
         switch (currentRequest.Type)
         {
             case PathType.Normal :
-                StartCoroutine(agent.AStar(currentRequest.pathStart, currentRequest.pathEnd, GameManager.Instance.BadPC ? 10 : 1));
+                StartCoroutine(agent.AStar(currentRequest.pathStart, currentRequest.pathEnd, GameManager.Instance.BadPC ? 20 : 10));
                 break;
             case PathType.Stealthy :
                 Debug.Log("Stealthy");

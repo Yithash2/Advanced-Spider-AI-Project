@@ -85,7 +85,23 @@ public class AStarMap : MonoBehaviour
                 
                 var r = Physics2D.BoxCastAll(new Vector2(x, y), new Vector2(worldSize, worldSize) * 0.5f, 0f, Vector2.zero, 1, layerMask.value);
                 
-                _mapNodes[i, j].Walkable = r.Length == 0;
+                var isWalkable = r.Length == 0;
+                if (!isWalkable)
+                {
+                    var nbrOfHit = 0;
+                    
+                    nbrOfHit+=Physics2D.BoxCastAll(new Vector2(x-worldSize/2, y-worldSize/2), Vector2.one * 0.5f, 0f, Vector2.zero, 1, layerMask.value).Length >0 ? 1 : 0;
+                    nbrOfHit+=Physics2D.BoxCastAll(new Vector2(x+worldSize/2, y-worldSize/2), Vector2.one * 0.5f, 0f, Vector2.zero, 1, layerMask.value).Length>0 ? 1 : 0;
+                    nbrOfHit+=Physics2D.BoxCastAll(new Vector2(x-worldSize/2, y+worldSize/2), Vector2.one * 0.5f, 0f, Vector2.zero, 1, layerMask.value).Length>0 ? 1 : 0;
+                    nbrOfHit+=Physics2D.BoxCastAll(new Vector2(x+worldSize/2, y+worldSize)/2, Vector2.one * 0.5f, 0f, Vector2.zero, 1, layerMask.value).Length>0 ? 1 : 0;
+                    if (nbrOfHit <= 1)
+                    {
+                        isWalkable = true;
+                    }
+                    
+                }
+                
+                _mapNodes[i, j].Walkable = isWalkable;
                 
                 _mapNodes[i, j].G = float.PositiveInfinity;
                 _mapNodes[i, j].F = float.PositiveInfinity;
