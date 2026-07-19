@@ -52,15 +52,15 @@ public class AStarAgent
         bool pathSuccess = false;
         int iterations = 0;
         
-        bool ghostWalk = !startNode.Walkable; // Si on commence sur une case non marchable alors on autorise (temporairement) de NoClip
+        bool ghostWalk = false; //isWalkable Si on commence sur une case non marchable alors on autorise (temporairement) de NoClip
         //Cela a été fait apres avoir vu que la map pouvais avoir un degré varié de detail, ou la case est détecté non marchable alors que si
 
-        if (goalNode.Walkable)
+        if (goalNode.IsWalkable)
         {
             while (openList.Count > 0)
             {
                 Node current = openList.Pop();
-                ghostWalk = ghostWalk && current.Walkable; //Si la case courante est marchable alors, on autorise plus le NoClip
+                ghostWalk = ghostWalk && current.IsWalkable; //Si la case courante est marchable alors, on autorise plus le NoClip
                 openSet.Remove(current);
                 closedSet.Add(current);
 
@@ -76,7 +76,7 @@ public class AStarAgent
                     if (closedSet.Contains(neighbour))
                         continue;
 
-                    float tentativeGForce = current.G + Vector2Int.Distance(current.Coords, neighbour.Coords);
+                    float tentativeGForce = current.G + Vector2Int.Distance(current.Coords, neighbour.Coords) + neighbour.Walkable;
                     if (tentativeGForce < neighbour.G)
                     {
                         neighbour.Parent = current;
@@ -135,9 +135,9 @@ public class AStarAgent
         bool pathSuccess = false;
         int iterations = 0;
         
-        bool ghostWalk = !startNode.Walkable; 
+        bool ghostWalk = !startNode.IsWalkable; 
 
-        if (goalNode.Walkable)
+        if (goalNode.IsWalkable)
         {
             while (openList.Count > 0)
             {
@@ -145,7 +145,7 @@ public class AStarAgent
                 openSet.Remove(current);
                 closedSet.Add(current);
                 
-                ghostWalk = ghostWalk && current.Walkable;
+                ghostWalk = ghostWalk && current.IsWalkable;
 
                 if (current.Coords == goalNode.Coords)
                 {
@@ -265,7 +265,7 @@ public class AStarAgent
 
         while (true)
         {
-            if (!map.IsInMap(new Vector2Int(x, y)) || !nodes[x, y].Walkable)
+            if (!map.IsInMap(new Vector2Int(x, y)) || !nodes[x, y].IsWalkable)
                 return false;
 
             if (x == to.x && y == to.y)
@@ -375,7 +375,12 @@ public class Node : IEquatable<Node>
     public float G;
     public float F;
     
-    public bool Walkable;
+    public bool IsWalkable
+    {
+        get { return Walkable >= 0; }
+    }
+    
+    public int Walkable;
 
     public Node Parent;
     public bool Equals(Node other)

@@ -100,14 +100,34 @@ public class AStarMap : MonoBehaviour
                     
                 }
                 
-                _mapNodes[i, j].Walkable = isWalkable;
+                _mapNodes[i, j].Walkable = isWalkable ? 0 : -1;
                 
                 _mapNodes[i, j].G = float.PositiveInfinity;
                 _mapNodes[i, j].F = float.PositiveInfinity;
                 _mapNodes[i, j].Parent = null;
             }
         }
-        
+
+        UpdateWalls();
+
+    }
+
+    private void UpdateWalls()
+    {
+        for (int i = 0; i < mapSize.x; i++)
+        {
+            for (int j = 0; j < mapSize.y; j++)
+            {
+                if (!_mapNodes[i, j].IsWalkable)
+                {
+                    if(i-1 >= 0)_mapNodes[i-1, j].Walkable = _mapNodes[i-1, j].IsWalkable ? 30 : -1;
+                    if(i+1 < mapSize.x)_mapNodes[i+1, j].Walkable = _mapNodes[i+1, j].IsWalkable ? 30 : -1;
+                    if(j+1 < mapSize.y)_mapNodes[i, j+1].Walkable = _mapNodes[i, j+1].IsWalkable ? 30 : -1;
+                    if(j-1 >= 0)_mapNodes[i, j-1].Walkable = _mapNodes[i, j-1].IsWalkable ? 30 : -1;
+                }
+                
+            }
+        }
     }
 
     private float[,] GenerateEnemyMap(Species specie)
@@ -233,7 +253,7 @@ public class AStarMap : MonoBehaviour
                     y >= 0 && y < mapSize.y)
                 {
                     Node n = nodes[x, y];
-                    if (n != null && (ghost ||n.Walkable))
+                    if (n != null && (ghost ||n.IsWalkable))
                         neighbours.Add(n);
                 }
             }
@@ -260,7 +280,7 @@ public class AStarMap : MonoBehaviour
             {
                 Vector3 pos = _mapNodes[i,j].RealCoords;
 
-                Gizmos.color = _mapNodes[i,j].Walkable ?  Color.green : Color.red;
+                Gizmos.color = _mapNodes[i,j].IsWalkable ?  Color.green : Color.red;
                 Gizmos.DrawWireCube(pos, new Vector3(worldSize, worldSize, 1));
 
             }
@@ -275,7 +295,7 @@ public class AStarMap : MonoBehaviour
         {
             for(int j = 0; j < mapSize.y; ++j)
             {
-                if (!_mapNodes[i, j].Walkable)
+                if (!_mapNodes[i, j].IsWalkable)
                 {
                     Vector3 pos = _mapNodes[i,j].RealCoords;
 

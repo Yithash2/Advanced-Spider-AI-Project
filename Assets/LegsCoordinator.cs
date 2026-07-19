@@ -35,4 +35,14 @@ public class LegsCoordinator : MonoBehaviour
         
     }
 
+    public void CalculateLegsSpeed(float speed)
+    {
+        foreach (LegAnimator leg in legs)
+        {
+            leg.SpeedOfMovement = speed * 2;
+        }
+        timeBetweenLegs = speed*Time.deltaTime/8;
+        
+    }
+
 }

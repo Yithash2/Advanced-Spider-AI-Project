@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class spider_script : MonoBehaviour
 {
@@ -52,7 +54,7 @@ public class spider_script : MonoBehaviour
     private Vector2[] rayDirections;
     private Vector2 smoothedSteering;
 
-
+    [SerializeField] private LegsCoordinator legsCoordinator;
     [SerializeField] private Animator animator;
     
 
@@ -63,7 +65,7 @@ public class spider_script : MonoBehaviour
         
         speed += Random.Range(-speed/4, speed/2);
         
-        Vector3 targetPosition = target.position +target.linearVelocity * (Time.deltaTime);
+        //Vector3 targetPosition = target.position +target.linearVelocity * (Time.deltaTime);
         
 
         // If part of a group, register with it
@@ -88,20 +90,24 @@ public class spider_script : MonoBehaviour
         GameManager.Instance.AddSpider(this);
     }
 
+    private void Update()
+    {
+        legsCoordinator.CalculateLegsSpeed(speed);
+    }
+
     void FixedUpdate()
     {
 
         if (Mouse.current.leftButton.isPressed)
         {
-            rb.linearVelocity = Vector2.zero;
+            //rb.linearVelocity = Vector2.zero;
             animator.SetBool("Emoting", true);
-            return;
+            //return;
         }
-        if (!Mouse.current.rightButton.isPressed)
+        else
         {
             animator.SetBool("Emoting", false);
         }
-        
         refreshCounter += Time.fixedDeltaTime;
         if (refreshCounter >= refreshSpeed)
         {;

@@ -28,6 +28,8 @@ public class SpiderGroup : MonoBehaviour
     private Vector3 lastRecordedCenter;
     [SerializeField] private float minMovementThreshold = 0.5f;
 
+    public bool GroupCanSeparate;
+
     void FixedUpdate()
     {
         if (members.Count == 0) return;
