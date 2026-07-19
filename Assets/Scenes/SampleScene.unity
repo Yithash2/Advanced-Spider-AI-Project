@@ -3535,7 +3535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   <EnemyMapRefreshTime>k__BackingField: 1
-  <BadPC>k__BackingField: 0
+  <BadPC>k__BackingField: 1
 --- !u!4 &1359728706
 Transform:
   m_ObjectHideFlags: 0
@@ -3882,7 +3882,7 @@ PrefabInstance:
     - target: {fileID: 7901656287059216256, guid: dbe38c6917ac27344aa345148d509ab7, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 7990587270412220007}
+      objectReference: {fileID: 2137071984}
     - target: {fileID: 7901656287059216256, guid: dbe38c6917ac27344aa345148d509ab7, type: 3}
       propertyPath: animator
       value: 
@@ -5282,6 +5282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2137071983}
   - component: {fileID: 2137071982}
+  - component: {fileID: 2137071984}
   m_Layer: 0
   m_Name: MouseFollow
   m_TagString: Untagged
@@ -5310,12 +5311,39 @@ Transform:
   m_GameObject: {fileID: 2137071981}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.48333, y: 1.80835, z: 0}
+  m_LocalPosition: {x: 29.5, y: 13.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &2137071984
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137071981}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &7990587270412220006
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5821,11 +5849,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbe38c6917ac27344aa345148d509ab7, type: 3}
---- !u!50 &7990587270412220007 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 5213784119033232144, guid: dbe38c6917ac27344aa345148d509ab7, type: 3}
-  m_PrefabInstance: {fileID: 7990587270412220006}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

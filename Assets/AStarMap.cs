@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using SimpleJSON;
 using UnityEngine;
 
 public class AStarMap : MonoBehaviour

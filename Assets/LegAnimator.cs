@@ -15,7 +15,18 @@ public class LegAnimator : MonoBehaviour
 
     public bool Ignore = false;
 
+    public int currentSolversTarget = 0;
+    public Transform[] targets;
+
     [SerializeField] private LimbSolver2D Solver;
+
+    public void Update()
+    {
+        if (targets[currentSolversTarget] != Solver.GetChain(0).target)
+        {
+            Solver.GetChain(0).target = targets[currentSolversTarget];
+        }
+    }
     
     public void Animate()
     {

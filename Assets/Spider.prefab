@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 122438746959697911}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.8026567, w: 0.59644127}
+  m_LocalRotation: {x: -0, y: -0, z: -0.61921537, w: 0.7852213}
   m_LocalPosition: {x: 0.47, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -234,7 +234,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 529454736360600264}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.8936245, w: 0.44881546}
+  m_LocalRotation: {x: 0, y: 0, z: 0.42244014, w: 0.9063909}
   m_LocalPosition: {x: 0.487, y: 0.003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -331,6 +331,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1394177113804872945}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &684861709843416089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1754376099206565610}
+  m_Layer: 0
+  m_Name: YAY Emote L
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1754376099206565610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684861709843416089}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6177494788712330539}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &905586901045851326
 GameObject:
@@ -471,7 +502,10 @@ MonoBehaviour:
   bodyTarget: {fileID: 285720046110401660}
   distanceThreshold: 0.6
   Ignore: 0
-  Solver: {fileID: 0}
+  currentSolversTarget: 0
+  targets:
+  - {fileID: 6242612600849865306}
+  Solver: {fileID: 8663430942034974180}
 --- !u!1 &1148078345673611343
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,7 +654,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954179369214919217}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.9153832, w: 0.40258375}
+  m_LocalRotation: {x: 0, y: 0, z: -0.3676161, w: 0.9299777}
   m_LocalPosition: {x: 0.484, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -970,7 +1004,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2516458153520847093}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.64543676, w: 0.76381373}
+  m_LocalRotation: {x: -0, y: -0, z: 0.70441383, w: 0.7097896}
   m_LocalPosition: {x: 0.485, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1024,7 +1058,10 @@ MonoBehaviour:
   bodyTarget: {fileID: 67295626092778889}
   distanceThreshold: 0.6
   Ignore: 0
-  Solver: {fileID: 0}
+  currentSolversTarget: 0
+  targets:
+  - {fileID: 9180160608318365333}
+  Solver: {fileID: 1387236802406189478}
 --- !u!1 &2998774827778075587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,6 +1099,7 @@ Transform:
   - {fileID: 3950874780499788435}
   - {fileID: 4224387133999181226}
   - {fileID: 67295626092778889}
+  - {fileID: 6177494788712330539}
   m_Father: {fileID: 7298901721195096854}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3135821833761099055
@@ -1111,7 +1149,10 @@ MonoBehaviour:
   bodyTarget: {fileID: 3321841993935882513}
   distanceThreshold: 0.6
   Ignore: 0
-  Solver: {fileID: 0}
+  currentSolversTarget: 0
+  targets:
+  - {fileID: 4567658002741086455}
+  Solver: {fileID: 6034094361825809236}
 --- !u!1 &3436157941186933560
 GameObject:
   m_ObjectHideFlags: 0
@@ -1570,7 +1611,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4066615907566112339}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.925498, w: 0.37875253}
+  m_LocalRotation: {x: 0, y: 0, z: 0.94317514, w: 0.332296}
   m_LocalPosition: {x: 0, y: 0.183, z: 0}
   m_LocalScale: {x: 3.030303, y: 3.030303, z: 3.030303}
   m_ConstrainProportionsScale: 0
@@ -1732,6 +1773,37 @@ MonoBehaviour:
     - {x: 0, y: 0, z: 0, w: 0}
     - {x: 0, y: 0, z: 0, w: 0}
   m_Flip: 1
+--- !u!1 &4711750669769088594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2093421467973353668}
+  m_Layer: 0
+  m_Name: YAY Emote R
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2093421467973353668
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4711750669769088594}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6177494788712330539}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5049117645366046269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1990,7 +2062,11 @@ MonoBehaviour:
   bodyTarget: {fileID: 14689950483775480}
   distanceThreshold: 0.6
   Ignore: 0
-  Solver: {fileID: 0}
+  currentSolversTarget: 0
+  targets:
+  - {fileID: 7858596814268938380}
+  - {fileID: 2093421467973353668}
+  Solver: {fileID: 3018544343696453304}
 --- !u!1 &5515162790601060974
 GameObject:
   m_ObjectHideFlags: 0
@@ -2021,6 +2097,39 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6807849829461601042}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6003143339818418584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6177494788712330539}
+  m_Layer: 0
+  m_Name: EmoteSpecific
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6177494788712330539
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003143339818418584}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1754376099206565610}
+  - {fileID: 2093421467973353668}
+  m_Father: {fileID: 1394177113804872945}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6281378757844284601
 GameObject:
@@ -2276,7 +2385,7 @@ MonoBehaviour:
   distanceToTarget: 3
   behaviour: 0
   pathColor: {r: 1, g: 0.14592034, b: 0, a: 1}
-  ProcAnimation: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!50 &5213784119033232144
 Rigidbody2D:
   serializedVersion: 5
@@ -2418,7 +2527,11 @@ MonoBehaviour:
   bodyTarget: {fileID: 3950874780499788435}
   distanceThreshold: 0.6
   Ignore: 0
-  Solver: {fileID: 0}
+  currentSolversTarget: 0
+  targets:
+  - {fileID: 8614105355975011812}
+  - {fileID: 1754376099206565610}
+  Solver: {fileID: 2912355458393816763}
 --- !u!1 &6722569753917673542
 GameObject:
   m_ObjectHideFlags: 0
@@ -2444,7 +2557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6722569753917673542}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.23797792, w: 0.97127056}
+  m_LocalRotation: {x: 0, y: 0, z: 0.293867, w: 0.95584637}
   m_LocalPosition: {x: 0, y: 0.183, z: 0}
   m_LocalScale: {x: 3.030303, y: 3.030303, z: 3.030303}
   m_ConstrainProportionsScale: 0
@@ -2714,7 +2827,10 @@ MonoBehaviour:
   bodyTarget: {fileID: 756293521814126587}
   distanceThreshold: 0.6
   Ignore: 0
-  Solver: {fileID: 0}
+  currentSolversTarget: 0
+  targets:
+  - {fileID: 8451917148029270944}
+  Solver: {fileID: 4928457413404994733}
 --- !u!1 &7579219308324118384
 GameObject:
   m_ObjectHideFlags: 0
@@ -3138,7 +3254,10 @@ MonoBehaviour:
   bodyTarget: {fileID: 6580648689698605964}
   distanceThreshold: 0.6
   Ignore: 0
-  Solver: {fileID: 0}
+  currentSolversTarget: 0
+  targets:
+  - {fileID: 1415696284572652065}
+  Solver: {fileID: 9062067986387994601}
 --- !u!1 &8495615142695933300
 GameObject:
   m_ObjectHideFlags: 0
@@ -3371,4 +3490,7 @@ MonoBehaviour:
   bodyTarget: {fileID: 4224387133999181226}
   distanceThreshold: 0.6
   Ignore: 0
-  Solver: {fileID: 0}
+  currentSolversTarget: 0
+  targets:
+  - {fileID: 292849978503112171}
+  Solver: {fileID: 1542615668907461413}
