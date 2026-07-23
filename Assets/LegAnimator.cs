@@ -4,7 +4,11 @@ using UnityEngine.U2D.IK;
 
 public class LegAnimator : MonoBehaviour
 {
+    [SerializeField] private int legId;
+    
     public float SpeedOfMovement = 1 / 0.2f;
+
+    [SerializeField] private spider_script spider;
     
     [SerializeField]
     private Transform bodyTarget;
@@ -12,12 +16,15 @@ public class LegAnimator : MonoBehaviour
     private Transform movableTarget; // Used for sticking the legs to walls
     
     [SerializeField, Range(0,2f)]
-    private float distanceThreshold, maxDistance;
+    private float distanceThreshold, maxDistance, maxDetachingDistance;
     
     //public float DistanceByMovement {get {return distanceThreshold*1.5f;}}
     
     public bool IsAnimating { get; private set; }
     public bool ReachedMidPoint { get; private set; }
+    
+    [SerializeField]
+    LayerMask layerMask;
 
     public bool Ignore = false;
     private bool blocked = false;
@@ -39,27 +46,31 @@ public class LegAnimator : MonoBehaviour
 
     private void UpdateMovableTarget()
     {
-        var hits = Physics2D.CircleCast(bodyTarget.position, 0.4f,Vector2.right,0.4f,LayerMask.GetMask("Obstacle"));
+        var hits = Physics2D.CircleCast(bodyTarget.position, 0.4f,Vector2.right,0.4f,layerMask.value);
 
-        if (hits)
+        if (hits && !spider.IsMyOwnLeg(hits.collider))
         {
             blocked = true;
             movableTarget.position = hits.point;
-            
+            if (hits.collider.gameObject.layer == LayerMask.NameToLayer("Spider") )
+            {
+                //spider.Blush(true,legId);
+            }
         }
-        else
+        else if(!blocked|| Vector2.Distance(movableTarget.position, bodyTarget.position) > maxDetachingDistance)
         {
+            //Debug.Log("UnBlushing");
             blocked = false;
             movableTarget.position = bodyTarget.position;
+            spider.Blush(false,legId);
         }
-        
     }
     
-    public void Animate()
+    public void Animate(float Speed)
     {
         if (Ignore) return;
 
-        if (blocked)
+        /*if (blocked)
         {
             if (!IsAnimating) {
                 IsAnimating = true;
@@ -67,13 +78,14 @@ public class LegAnimator : MonoBehaviour
             }
         }
         else
-        {
-            if(Vector3.Distance(bodyTarget.position, transform.position) <= distanceThreshold) return;
+        {*/
+            if(Vector3.Distance(movableTarget.position, transform.position) <= distanceThreshold) return;
             
             if (Vector3.Distance(movableTarget.position, transform.position) > maxDistance)
             {
                 if (!IsAnimating) {
                     IsAnimating = true;
+
                     StartCoroutine(MoveLegToRest());
                 }  
             }
@@ -81,27 +93,32 @@ public class LegAnimator : MonoBehaviour
             {
                 if (!IsAnimating) {
                     IsAnimating = true;
-                    StartCoroutine(MoveLegToMove());
+                    StartCoroutine(MoveLegToMove(Speed));
                 }
             }
                     
            
-        }
+        //}
         
         
     }
 
-    private IEnumerator MoveLegToMove()
+    private float AnimationCurve()
+    {
+        return -Mathf.Exp(-SpeedOfMovement / 5);
+    }
+
+    private IEnumerator MoveLegToMove(float speed)
     {
         
         var dirTotarget = (movableTarget.position - transform.position).normalized;
-        var nextPosition = movableTarget.position + (dirTotarget * (distanceThreshold * 2f));
+        var nextPosition = movableTarget.position + (dirTotarget * (speed * Time.deltaTime));
         var midPoint = (nextPosition + transform.position) * 0.5f;
         midPoint.y += 0.5f;
         
         while (Vector3.Distance(midPoint, transform.position) > 0.01f)
         {
-            transform.position = Vector2.MoveTowards(transform.position, midPoint, SpeedOfMovement * Time.deltaTime);
+            transform.position = midPoint;
             if (Ignore)
             {
                 ReachedMidPoint = false;
@@ -111,10 +128,11 @@ public class LegAnimator : MonoBehaviour
             yield return 0;
         }
         ReachedMidPoint = true;
-        nextPosition = movableTarget.position + (dirTotarget * (distanceThreshold * 2f));
+        nextPosition = movableTarget.position + (dirTotarget * (speed * Time.deltaTime));
         while (Vector3.Distance(nextPosition, transform.position) > 0.01f)
         {
-            transform.position = Vector2.MoveTowards(transform.position, nextPosition, SpeedOfMovement * Time.deltaTime);
+            transform.position = nextPosition;
+
             if (Ignore)
             {
                 ReachedMidPoint = false;
@@ -136,7 +154,7 @@ public class LegAnimator : MonoBehaviour
         
         while (Vector3.Distance(midPoint, transform.position) > 0.01f)
         {
-            transform.position = Vector2.MoveTowards(transform.position, midPoint, SpeedOfMovement * Time.deltaTime);
+            transform.position = midPoint;
             if (Ignore)
             {
                 ReachedMidPoint = false;
@@ -149,7 +167,8 @@ public class LegAnimator : MonoBehaviour
         nextPosition = movableTarget.position;
         while (Vector3.Distance(nextPosition, transform.position) > 0.01f)
         {
-            transform.position = Vector2.MoveTowards(transform.position, nextPosition, SpeedOfMovement * Time.deltaTime);
+            transform.position = nextPosition;
+
             if (Ignore)
             {
                 ReachedMidPoint = false;

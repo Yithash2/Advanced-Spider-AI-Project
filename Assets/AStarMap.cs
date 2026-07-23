@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class AStarMap : MonoBehaviour
 {
     [SerializeField] private string mapFile;
@@ -10,6 +9,8 @@ public class AStarMap : MonoBehaviour
     private Vector2Int mapSize;
     [SerializeField]
     private Vector2 center;
+    
+    
 
     [SerializeField] private float worldSize;
     
@@ -201,8 +202,8 @@ public class AStarMap : MonoBehaviour
 
     public Vector2Int WorldToMapCoords(Vector2 coords)
     {
-        int i = Mathf.FloorToInt((coords.x - center.x) / worldSize);
-        int j = Mathf.FloorToInt((coords.y - center.y) / worldSize);
+        int i = Mathf.RoundToInt((coords.x - center.x) / worldSize);
+        int j = Mathf.RoundToInt((coords.y - center.y) / worldSize);
         return new Vector2Int(i, j);
     }
 
@@ -214,7 +215,7 @@ public class AStarMap : MonoBehaviour
 
     public Node[,] GetFreshNodes()
     {
-        Node[,] fresh = new Node[mapSize.x, mapSize.y];
+        /*Node[,] fresh = new Node[mapSize.x, mapSize.y];
         for (int i = 0; i < mapSize.x; i++)
         {
             for (int j = 0; j < mapSize.y; j++)
@@ -230,10 +231,11 @@ public class AStarMap : MonoBehaviour
                     Parent = null
                 };
             }
-        }
-
-        return fresh;
+        }*/
+        currentSearchId++;
+        return _mapNodes;
     }
+    
 
     public List<Node> GetNeighbours(Node[,] nodes, Vector2Int coords, bool ghost)
     {
@@ -250,7 +252,7 @@ public class AStarMap : MonoBehaviour
                 int y = coords.y + j;
 
                 if (x >= 0 && x < mapSize.x &&
-                    y >= 0 && y < mapSize.y)
+                    y >= 0 && y < mapSize.y && (i== 0|| j==0 ))
                 {
                     Node n = nodes[x, y];
                     if (n != null && (ghost ||n.IsWalkable))
@@ -260,6 +262,20 @@ public class AStarMap : MonoBehaviour
         }
 
         return neighbours;
+    }
+    
+    
+    int currentSearchId = 1;
+
+    public void PrepareNode(Vector2Int coord)
+    {
+        if (_mapNodes[coord.x, coord.y].LastSearchId != currentSearchId)
+        {
+            _mapNodes[coord.x, coord.y].LastSearchId = currentSearchId;
+            _mapNodes[coord.x, coord.y].G = float.PositiveInfinity;
+            _mapNodes[coord.x, coord.y].F = float.PositiveInfinity;
+            _mapNodes[coord.x, coord.y].Parent = null;
+        }
     }
 
 

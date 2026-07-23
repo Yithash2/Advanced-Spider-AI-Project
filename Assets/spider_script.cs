@@ -1,33 +1,28 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
-public class spider_script : MonoBehaviour
+public class spider_script : MonoBehaviour,IBoid
 {
     public Species specie;
-
-    [HideInInspector]public bool isAGeneral = false;
-    [Header("Steering")]
+    
     [SerializeField] private float speed = 3f;
-    [SerializeField] private float steeringSmooth = 0.15f;
-    [SerializeField] private float rayDistance = 4f;
-    [SerializeField] private LayerMask obstacleMask;
-    
-    [Header("Obstacle Avoidance Forces")]
-    [SerializeField] private float avoidanceStrength = 2f;
-    [SerializeField, Range(0.000001f, 2)] private float avoidanceFalloff = 1.5f;
 
-    [Header("Flocking (Group Behavior)")]
-    [field:SerializeField] public float CohesionRadius { get; private set; }
-    [SerializeField] private float cohesionStrength = 0.5f;
-    [SerializeField] private float separationRadius = 2f;
-    [SerializeField] private float separationStrength = 1f;
-    [SerializeField] private SpiderGroup group;
+    [SerializeField] private BoidComponent GroupingComponent;
+    public bool IsLost => GroupingComponent.IsLost;
+    public Vector2 Position => transform.position;
     
-    [SerializeField] private float separationTime = 1f;
-    private float _separationCounter = 0f;
+    public Group CurrentGoup
+    {
+        get => GroupingComponent.Group;
+        set => GroupingComponent.Group = value;
+    }
+    
+    [SerializeField] private Group group;
     
     [Header("Pathfinding")]
     [SerializeField] private Species ennemie;
@@ -45,46 +40,35 @@ public class spider_script : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private Color pathColor = Color.green;
 
-    private Rigidbody2D rb;
+    [SerializeField]
+    private Rigidbody2D rigidBody;
+    [field:SerializeField] public ColorChanger ColorComponent { get; private set; }
     private Vector3[] path;
     private int targetIndex;
     private float refreshCounter;
-
-    private const int RayCount = 16;
-    private Vector2[] rayDirections;
-    private Vector2 smoothedSteering;
+    
+    public Vector2 Velocity => rigidBody.linearVelocity;
+    
 
     [SerializeField] private LegsCoordinator legsCoordinator;
     [SerializeField] private Animator animator;
-    
 
+
+
+    [SerializeField] private LayerMask temp_layerMask;
+    private bool IsCharging = false;
+    
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        PrecomputeRayDirections();
+        speed += Random.Range(-speed/4, speed/4);
         
-        speed += Random.Range(-speed/4, speed/2);
-        
-        //Vector3 targetPosition = target.position +target.linearVelocity * (Time.deltaTime);
-        
-
         // If part of a group, register with it
-        if (group != null)
+        if (group)
         {
-            group.AddMember(this);
-        }
-        else
-        {
-            // Solo spider: request own path
-            /*switch (behaviour)
-            {
-                case Behaviour.Attack:
-                    AStarDemandsScheduler.RequestPath(transform.position, targetPosition , OnPathFound);
-                    break;
-                case Behaviour.Avoid:
-                    AStarDemandsScheduler.RequestStealthyPath(transform.position, targetPosition ,ennemie, 13, OnPathFound);
-                    break;
-            }*/
+            CurrentGoup = group;
+            
+            CurrentGoup.AddMember(this);
+            target = CurrentGoup.target;
         }
 
         GameManager.Instance.AddSpider(this);
@@ -92,15 +76,26 @@ public class spider_script : MonoBehaviour
 
     private void Update()
     {
-        legsCoordinator.CalculateLegsSpeed(speed);
+        legsCoordinator.UpdateAnimation(speed);
     }
 
+    private void OnValidate()
+    {
+        if (!GroupingComponent)
+        {
+            GroupingComponent = GetComponent<BoidComponent>();
+            CurrentGoup = group;
+        }
+        
+        if(!rigidBody)
+            rigidBody = GetComponent<Rigidbody2D>();
+    }
     void FixedUpdate()
     {
 
         if (Mouse.current.leftButton.isPressed)
         {
-            //rb.linearVelocity = Vector2.zero;
+            //rigidBody.linearVelocity = Vector2.zero;
             animator.SetBool("Emoting", true);
             //return;
         }
@@ -108,59 +103,170 @@ public class spider_script : MonoBehaviour
         {
             animator.SetBool("Emoting", false);
         }
-        refreshCounter += Time.fixedDeltaTime;
-        if (refreshCounter >= refreshSpeed)
-        {;
-            if (group == null ||isAGeneral)
+
+        if (!IsCharging)
+        {
+            refreshCounter += Time.fixedDeltaTime;
+            if (CurrentGoup == null)
             {
-                Vector3 targetPosition = target.position +target.linearVelocity * (Time.deltaTime * refreshSpeed) ;
-                
-                switch (behaviour)
-                {
-                    case Behaviour.Attack:
-                        if (Vector2.Distance(transform.position, target.position) < 0.3f)
-                        {
-                            rb.linearVelocity = Vector2.zero;
-                        }else
-                            AStarDemandsScheduler.RequestPath(transform.position, targetPosition , OnPathFound);
-                        break;
-                    case Behaviour.Avoid:
-                        AStarDemandsScheduler.RequestStealthyPath(transform.position + (Vector3)rb.linearVelocity * (Time.deltaTime * refreshSpeed), targetPosition ,ennemie, distanceToTarget, OnPathFound);
-                        break;
-                }
-               
+                SoloBehaviour();
             }
+            else
+            {
+                bool createdAPath = false;
+                var newVel = GroupingComponent.GroupingBehaviour(rigidBody.linearVelocity, DemandAstarPath,out createdAPath);
+                if(!createdAPath)
+                    ApplySteering(newVel);
+            }
+
+            if(behaviour == Behaviour.Attack)
+                if (Vector2.Distance(target.position, transform.position) < distanceToTarget)
+                {
+                    var dirToTarget = (target.transform.position - transform.position).normalized;
+                    var r =Physics2D.Raycast(transform.position, dirToTarget, distanceToTarget, temp_layerMask.value);
+                    if (!r)
+                    {
+                        IsCharging = true;
+                        rigidBody.linearVelocity = Vector2.zero;
+                        StartCoroutine(Charging(dirToTarget));
+                    }
+                
+                }
+        }
+        
+    }
+
+    IEnumerator Charging(Vector2 direction)
+    {
+        var origin = transform.position;
+        for (float t = 0; t < 1; t+= Time.fixedDeltaTime)
+        {
+            rigidBody.linearVelocity = -direction.normalized * (speed/3);
+            yield return new WaitForFixedUpdate();
+        }
+
+        var originalDir = direction;
+        direction = (target.transform.position - transform.position).normalized;
+        rigidBody.linearVelocity = Vector2.zero;
+        if (Mathf.Acos(Vector2.Dot(direction.normalized, originalDir.normalized)) > Mathf.PI/6)
+        {
+            IsCharging = false;
+            yield break;
+        }
+
+        var targetDist = (transform.position - (origin)).magnitude + (distanceToTarget * 2);
+        for (float t = 0; t < targetDist/(speed*4); t+= Time.fixedDeltaTime)
+        {
+            rigidBody.linearVelocity = direction.normalized * (speed*4);
+            yield return new WaitForFixedUpdate();
+        }
+        rigidBody.linearVelocity = Vector2.zero;
+        var f = Random.Range(0, 2);
+        for (float t = 0; t < f; t += Time.fixedDeltaTime)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        
+        IsCharging = false;
+        
+    }
+
+    
+
+    private void SoloBehaviour()
+    {
+        if(!target) return;
+        switch (behaviour)
+        {
+            case Behaviour.Attack:
+                DemandAstarPath(target.position + target.linearVelocity * (Time.deltaTime * refreshSpeed));
+                break;
+            case Behaviour.Avoid:
+                DemandAvoidAStarPath();
+                break;
+        }
+           
+        
+    }
+
+    private void DemandAstarPath(Vector3 targetPosition)
+    {
+        if (refreshCounter >= refreshSpeed)
+        {
+            if (Vector2.Distance(transform.position, target.position) < 1f)
+            {
+                rigidBody.linearVelocity = Vector2.zero;
+            }
+            else
+                AStarDemandsScheduler.RequestPath(transform.position, targetPosition, OnPathFound);
+            
             refreshCounter = 0;
         }
+        
     }
 
-
-    public void AddGroup(SpiderGroup group2)
+    private void DemandAvoidAStarPath()
     {
-        group = group2;
-        if(!isAGeneral)
-            target = null;
+        if (refreshCounter >= refreshSpeed)
+        {
+            Vector3 targetPosition = target.position;
+
+            if (Vector2.Distance(transform.position, target.position) < 1f)
+            {
+                rigidBody.linearVelocity = Vector2.zero;
+            }
+            else
+                AStarDemandsScheduler.RequestStealthyPath(
+                    transform.position, targetPosition, ennemie, distanceToTarget, OnPathFound);
+            
+            refreshCounter = 0;
+        }
+        
+    }
+    
+    public void Blush(bool b, int legId)
+    {
+        ColorComponent.Blush(b, legId);
     }
 
-    public SpiderGroup GetGroup()
+    [SerializeField] private Collider2D[] legsColliders;
+
+    public bool IsMyOwnLeg(Collider2D leg)
     {
-        return group;
+        foreach (var legCollider in legsColliders)
+        {
+            if (legCollider == leg) return true;
+        }
+
+        return false;
+    }
+    
+    public void AddGroup(Group group2, Color teamColor)
+    {
+        path = null;
+        CurrentGoup = group2;
+        ColorComponent.ChangeColor(teamColor);
+        GroupingComponent.Group = CurrentGoup;
+        target = group2.target;
+    }
+    public void DeclaredFound()
+    {
+        GroupingComponent.IsLost =  false;
+        StopCoroutine(FollowPath());
+        path = null;
+        GroupingComponent.ResetLostCounter();
+    }
+
+    public void DeclaredLost()
+    {
+        GroupingComponent.IsLost = true;
+        //lostCounter = 0;
     }
     public void RemoveGroup()
     {
-        target = group.target;
-        group = null;
-    }
-    void PrecomputeRayDirections()
-    {
-        rayDirections = new Vector2[RayCount];
-        float angleStep = 360f / RayCount;
-
-        for (int i = 0; i < RayCount; i++)
-        {
-            float angle = Mathf.Deg2Rad * (i * angleStep);
-            rayDirections[i] = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-        }
+        target = CurrentGoup.target;
+        CurrentGoup = null;
+        //GroupingComponent.Group = null;
     }
     public void OnPathFound(Vector3[] newPath, bool success)
     {
@@ -170,199 +276,54 @@ public class spider_script : MonoBehaviour
         path = newPath;
         targetIndex = 0;
 
-        StopAllCoroutines();
+        StopCoroutine(FollowPath());
         StartCoroutine(FollowPath());
     }
-    public void SetGroupPath(Vector3[] groupPath)
+    public int IsInGroup(Group group2)
     {
-        path = groupPath;
-        targetIndex = 0;
-
-        StopAllCoroutines();
-        rb.linearVelocity = Vector2.zero;
-        StartCoroutine(FollowPath( 3f));
-    }
-    public int IsInGroup(SpiderGroup group2)
-    {
-        if (group == group2)
+        if (CurrentGoup == group2)
             return 2;
         
-        if (group == null) 
+        if (CurrentGoup == null) 
             return 0;
         
         return 1;
     }
-    IEnumerator FollowPath(float precision = 3f)
-    {
-        if (path == null || path.Length < 1)
-            yield break;
-
+    IEnumerator FollowPath(float precision = 0.2f) {
+        if (path == null || path.Length < 1) yield break;
         Vector3 currentWaypoint = path[0];
-        
-        while (true)
-        {
+        while (true) { 
+            if(target == null || path == null)
+                yield break;
             if (Vector2.Distance(transform.position, target.position) < 0.3f)
             {
-                rb.linearVelocity = Vector2.zero;
-                yield break;
+                rigidBody.linearVelocity = Vector2.zero; yield break;
             }
-            
-            Vector3 toWaypoint = currentWaypoint -  transform.position;
+            Vector3 toWaypoint = currentWaypoint - transform.position;
             float distance = toWaypoint.magnitude;
             
-            // Check if waypoint is reached (within threshold OR if we've passed it)
+            toWaypoint = Vector2.Lerp(Velocity.normalized, toWaypoint, 0.125f);
+            ApplySteering(toWaypoint.normalized);
+            
             bool isClose = distance < precision;
-            bool isPassed = Vector3.Dot(rb.linearVelocity, toWaypoint) < 0 && distance < 1f;
+            bool isPassed = Vector3.Dot(rigidBody.linearVelocity, toWaypoint) < 0 && distance < 1f;
             
-            if (isClose || isPassed)
+            if (isPassed || isClose)
             {
-                targetIndex++;
-                if (targetIndex >= path.Length)
+                targetIndex++; if (targetIndex >= path.Length) 
                     yield break;
-
                 currentWaypoint = path[targetIndex];
-            }
-
-            Vector2 steering = ComputeSteering(currentWaypoint);
-
-            /*if (group != null && steering.magnitude < 3)
-            {
-                group.RemoveMember(this);
-            }*/
-            
-            ApplySteering(steering);
-
-            yield return null;
+            } 
+            yield return new WaitForFixedUpdate(); 
         }
     }
-    Vector2 ComputeObstacleAvoidance()
-    {
-        Vector2 selfPos = transform.position;
-        Vector2 avoidance = Vector2.zero;
-
-        for (int i = 0; i < RayCount; i++)
-        {
-            Vector2 dir = rayDirections[i];
-
-            var hit = Physics2D.RaycastAll(selfPos, dir, rayDistance, obstacleMask);
-            if (hit.Length > 1)
-            {
-                float dist = hit[1].distance;
-                float strength = Mathf.Clamp01(1f - (dist / rayDistance * avoidanceFalloff));
-
-                // Repulsion direction = away from obstacle
-                Vector2 push = -dir * strength * avoidanceStrength;
-
-                avoidance += push;
-
-                Debug.DrawLine(selfPos, hit[1].point, Color.yellow);
-            }
-        }
-
-        return avoidance;
-    }
-    Vector2 ComputeFlocking()
-    {
-        if (group == null || group.MemberCount < 2)
-            return Vector2.zero;
-
-        Vector2 selfPos = transform.position;
-        Vector2 flocking = Vector2.zero;
-
-        // Cohesion: move toward group center
-        Vector3 groupCenter = group.GetGroupCenter();
-        float distToCenter = Vector2.Distance(selfPos, groupCenter);
-        if (distToCenter > 0.1f && distToCenter < CohesionRadius)
-        {
-            Vector2 toCohesion = ((Vector2)groupCenter - selfPos).normalized;
-            flocking += toCohesion * cohesionStrength;
-        }
-
-        // Separation: avoid crowding group members
-        Collider2D[] nearby = Physics2D.OverlapCircleAll(selfPos, separationRadius);
-        Vector2 separation = Vector2.zero;
-        int neighborCount = 0;
-
-        foreach (var collider in nearby)
-        {
-            if (collider.CompareTag("Spider") && collider.gameObject != gameObject)
-            {
-                Vector2 away = (selfPos - (Vector2)collider.transform.position).normalized;
-                separation += away;
-                neighborCount++;
-            }
-        }
-
-        if (neighborCount > 0)
-            flocking += (separation / neighborCount) * separationStrength;
-
-        return flocking;
-    }
-    Vector2 ComputeSteering(Vector3 waypoint)
-    {
-        Vector2 selfPos = transform.position;
-        Vector2 targetDir = ((Vector2)waypoint - selfPos).normalized;
-
-        float[] weights = new float[RayCount];
-        Vector2 resultant = Vector2.zero;
-
-        for (int i = 0; i < RayCount; i++)
-        {
-            Vector2 dir = rayDirections[i];
-
-            var hit = Physics2D.RaycastAll(selfPos, dir, rayDistance, obstacleMask);
-            bool blocked = hit.Length > 1;
-            if (blocked)
-            {
-                weights[i] = 0;
-                continue;
-            }
-
-            float alignment = Mathf.Clamp01(Vector2.Dot(dir, targetDir));
-            float patternBias = 1;
-
-            float weight = alignment * patternBias;
-            weights[i] = weight;
-
-            resultant += dir * weight;
-        }
-
-        // Add obstacle avoidance
-        Vector2 avoidance = ComputeObstacleAvoidance();
-        float distToWaypoint = Vector2.Distance(selfPos, waypoint);
-        
-        // Reduce avoidance influence when very close to waypoint to prevent getting stuck
-        if (distToWaypoint < 1f)
-        {
-            avoidance *= 0.3f;
-            resultant = Vector2.Lerp(resultant, (Vector2)waypoint.normalized - selfPos, 0.6f);
-        }
-        
-        resultant += avoidance;
-
-        // Add flocking forces (cohesion + separation)
-        Vector2 flocking = ComputeFlocking();
-        resultant += flocking;
-
-        // Smooth steering
-        smoothedSteering = Vector2.Lerp(smoothedSteering, resultant, steeringSmooth);
-
-        return smoothedSteering;
-    }
+    
     void ApplySteering(Vector2 steering)
     {
+        Vector2 desiredVelocity = steering.normalized * speed;
+        rigidBody.linearVelocity = desiredVelocity;
         
-        if (steering.sqrMagnitude > 0.0001f)
-        {
-            Vector2 desiredVelocity = steering.normalized * speed;
-            rb.linearVelocity = desiredVelocity;
-        }
-        else
-        {
-            rb.linearVelocity = Vector2.zero;
-        }
-        
-        rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, speed);
+        rigidBody.linearVelocity = Vector2.ClampMagnitude(rigidBody.linearVelocity, speed);
     }
     private void OnDrawGizmos()
     {

@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7857007594490924217}
-  m_Layer: 0
+  - component: {fileID: 3813104402312230205}
+  m_Layer: 7
   m_Name: Effector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,13 +25,49 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 122438746959697911}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.80265707, w: 0.59644085}
+  m_LocalRotation: {x: -0, y: -0, z: 0.80265707, w: 0.5964409}
   m_LocalPosition: {x: 0.47, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 272717183389484201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 7.796}
+--- !u!58 &3813104402312230205
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122438746959697911}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.04
 --- !u!1 &435776649431933964
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +134,7 @@ SpriteRenderer:
   m_SmallMeshCulling: 1
   m_ForceMeshLod: -1
   m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
@@ -121,10 +158,10 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1402851497
   m_SortingLayer: 1
-  m_SortingOrder: -50
+  m_SortingOrder: 39
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: fc4ea36668516654bba82a6c5d31bd4d, type: 3}
-  m_Color: {r: 0.4490565, g: 0.039821967, b: 0.26154193, a: 1}
+  m_Color: {r: 0.90188676, g: 0.90188676, b: 0.90188676, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -220,7 +257,7 @@ GameObject:
   - component: {fileID: 272717183389484201}
   - component: {fileID: 1695373077080731998}
   m_Layer: 0
-  m_Name: SpiderLeg (1)
+  m_Name: Lower Leg Right FM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,7 +271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 529454736360600264}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.89362407, w: 0.44881633}
+  m_LocalRotation: {x: 0, y: 0, z: -0.8936241, w: 0.44881624}
   m_LocalPosition: {x: 0.487, y: 0.003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -292,7 +329,7 @@ SpriteRenderer:
   m_SortingOrder: -60
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 5438af015edc9c947ae33d1458f01d14, type: 3}
-  m_Color: {r: 0.4641509, g: 0.08669985, b: 0.3056819, a: 1}
+  m_Color: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -405,7 +442,7 @@ GameObject:
   - component: {fileID: 745416148258659672}
   - component: {fileID: 1191324553970424245}
   m_Layer: 0
-  m_Name: Spider Leg Right B
+  m_Name: Leg Right B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -419,7 +456,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 905586901045851326}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.0363323, w: 0.99933976}
+  m_LocalRotation: {x: 0, y: 0, z: -0.08158933, w: 0.9966661}
   m_LocalPosition: {x: 0, y: -0.058410645, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -477,7 +514,7 @@ SpriteRenderer:
   m_SortingOrder: -55
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7fa75e3ee3964294fb2f51d3ee3bf591, type: 3}
-  m_Color: {r: 0.9921569, g: 0.043137256, b: 0, a: 1}
+  m_Color: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -499,7 +536,7 @@ GameObject:
   m_Layer: 0
   m_Name: R B Solver_Target
   m_TagString: Untagged
-  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -512,7 +549,7 @@ Transform:
   m_GameObject: {fileID: 1112786600651868232}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2418003, y: -0.4254856, z: 0}
+  m_LocalPosition: {x: 0.20357513, y: -0.4445982, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -530,10 +567,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b92de7b95e4284ea082cfa960e4948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegAnimator
+  legId: 3
   SpeedOfMovement: 5
+  spider: {fileID: 7901656287059216256}
   bodyTarget: {fileID: 285720046110401660}
   movableTarget: {fileID: 5173919499235720074}
-  distanceThreshold: 0.6
+  distanceThreshold: 0.38
+  maxDistance: 0.7
+  maxDetachingDistance: 1.56
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 200
   Ignore: 0
   currentSolversTarget: 0
   targets:
@@ -550,7 +594,7 @@ GameObject:
   - component: {fileID: 7267439164159823526}
   - component: {fileID: 4020619289429221031}
   m_Layer: 0
-  m_Name: SpiderLeg (1)
+  m_Name: Lower Leg Right BM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -564,7 +608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148078345673611343}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.75555366, w: 0.6550868}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7555539, w: 0.6550866}
   m_LocalPosition: {x: 0.447, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -622,7 +666,7 @@ SpriteRenderer:
   m_SortingOrder: -60
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 5438af015edc9c947ae33d1458f01d14, type: 3}
-  m_Color: {r: 0.4641509, g: 0.08669985, b: 0.3056819, a: 1}
+  m_Color: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -704,7 +748,7 @@ GameObject:
   - component: {fileID: 7385363958676615442}
   - component: {fileID: 8325626864587487119}
   m_Layer: 0
-  m_Name: SpiderLeg (1)
+  m_Name: Lower Leg Left FM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -776,7 +820,7 @@ SpriteRenderer:
   m_SortingOrder: -60
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 5438af015edc9c947ae33d1458f01d14, type: 3}
-  m_Color: {r: 0.4641509, g: 0.08669985, b: 0.3056819, a: 1}
+  m_Color: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -796,7 +840,7 @@ GameObject:
   - component: {fileID: 5759322547456877056}
   - component: {fileID: 9026737806723794409}
   m_Layer: 0
-  m_Name: Spider Leg Right F
+  m_Name: Leg Right F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -810,7 +854,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2074941153436923538}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.47887868, w: 0.8778811}
+  m_LocalRotation: {x: 0, y: 0, z: 0.4788789, w: 0.877881}
   m_LocalPosition: {x: 0, y: 0.1131897, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -868,7 +912,7 @@ SpriteRenderer:
   m_SortingOrder: -55
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7fa75e3ee3964294fb2f51d3ee3bf591, type: 3}
-  m_Color: {r: 0.9921569, g: 0.043137256, b: 0, a: 1}
+  m_Color: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -1053,7 +1097,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4296280518536019821}
-  m_Layer: 0
+  - component: {fileID: 2980643299104596717}
+  m_Layer: 7
   m_Name: Effector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1068,13 +1113,49 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2516458153520847093}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.6454376, w: 0.763813}
+  m_LocalRotation: {x: -0, y: -0, z: -0.64543754, w: 0.76381314}
   m_LocalPosition: {x: 0.485, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7385363958676615442}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 7.633}
+--- !u!58 &2980643299104596717
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2516458153520847093}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.04
 --- !u!1 &2568525066488594833
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,7 +1169,7 @@ GameObject:
   m_Layer: 0
   m_Name: L B Solver_Target
   m_TagString: Untagged
-  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1101,7 +1182,7 @@ Transform:
   m_GameObject: {fileID: 2568525066488594833}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: -0.253, y: -0.42, z: 0}
+  m_LocalPosition: {x: -0.2721405, y: -0.4391985, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1119,10 +1200,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b92de7b95e4284ea082cfa960e4948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegAnimator
+  legId: 7
   SpeedOfMovement: 5
+  spider: {fileID: 7901656287059216256}
   bodyTarget: {fileID: 67295626092778889}
   movableTarget: {fileID: 4129882994277153210}
-  distanceThreshold: 0.6
+  distanceThreshold: 0.38
+  maxDistance: 0.7
+  maxDetachingDistance: 1.56
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 200
   Ignore: 0
   currentSolversTarget: 0
   targets:
@@ -1251,7 +1339,7 @@ GameObject:
   m_Layer: 0
   m_Name: R F Solver_Target
   m_TagString: Untagged
-  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1282,10 +1370,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b92de7b95e4284ea082cfa960e4948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegAnimator
+  legId: 0
   SpeedOfMovement: 5
+  spider: {fileID: 7901656287059216256}
   bodyTarget: {fileID: 3321841993935882513}
   movableTarget: {fileID: 1601082358041555595}
-  distanceThreshold: 0.6
+  distanceThreshold: 0.38
+  maxDistance: 0.7
+  maxDetachingDistance: 1.56
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 200
   Ignore: 0
   currentSolversTarget: 0
   targets:
@@ -1366,7 +1461,7 @@ GameObject:
   - component: {fileID: 3643850095305540284}
   - component: {fileID: 7797720120514799623}
   m_Layer: 0
-  m_Name: Spider Leg Right BM
+  m_Name: Leg Right BM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1380,7 +1475,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3551544461558664606}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.14359406, w: 0.9896367}
+  m_LocalRotation: {x: 0, y: 0, z: 0.1435946, w: 0.9896366}
   m_LocalPosition: {x: 0, y: 0.0046195984, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1438,7 +1533,7 @@ SpriteRenderer:
   m_SortingOrder: -55
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7fa75e3ee3964294fb2f51d3ee3bf591, type: 3}
-  m_Color: {r: 0.9921569, g: 0.043137256, b: 0, a: 1}
+  m_Color: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -1456,7 +1551,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3234283497146426955}
-  m_Layer: 0
+  - component: {fileID: 7156743403894544154}
+  m_Layer: 7
   m_Name: Effector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1471,13 +1567,49 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3568298435200463610}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.5587447, w: 0.8293397}
+  m_LocalRotation: {x: -0, y: -0, z: -0.5587446, w: 0.82933974}
   m_LocalPosition: {x: 0.475, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 988105523385287205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 7.67}
+--- !u!58 &7156743403894544154
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3568298435200463610}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.04
 --- !u!1 &3578991855029063091
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,7 +1621,7 @@ GameObject:
   - component: {fileID: 1854094695302096341}
   - component: {fileID: 2682030414286984946}
   m_Layer: 0
-  m_Name: Spider Leg Left F
+  m_Name: Leg Left F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1503,7 +1635,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3578991855029063091}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.8531804, w: 0.5216159}
+  m_LocalRotation: {x: 0, y: 0, z: 0.8531799, w: 0.52161694}
   m_LocalPosition: {x: 0, y: 0.1131897, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1561,7 +1693,7 @@ SpriteRenderer:
   m_SortingOrder: -55
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7fa75e3ee3964294fb2f51d3ee3bf591, type: 3}
-  m_Color: {r: 0.9921569, g: 0.043137256, b: 0, a: 1}
+  m_Color: {r: 0.8037735, g: 0.8037735, b: 0.8037735, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -1581,7 +1713,7 @@ GameObject:
   - component: {fileID: 1769338418261166529}
   - component: {fileID: 7770103251033630408}
   m_Layer: 0
-  m_Name: Spider Leg Left BM
+  m_Name: Leg Left BM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1595,7 +1727,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3666861348013232430}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.9807388, w: 0.19532377}
+  m_LocalRotation: {x: 0, y: 0, z: 0.98073876, w: 0.19532418}
   m_LocalPosition: {x: 0, y: 0.0046195984, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1653,7 +1785,7 @@ SpriteRenderer:
   m_SortingOrder: -55
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7fa75e3ee3964294fb2f51d3ee3bf591, type: 3}
-  m_Color: {r: 0.9921569, g: 0.043137256, b: 0, a: 1}
+  m_Color: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -1702,7 +1834,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4576779698979646354}
-  m_Layer: 0
+  - component: {fileID: 2228694017646900464}
+  m_Layer: 7
   m_Name: Effector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1717,13 +1850,49 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3958310909784842633}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.7026175, w: 0.7115677}
+  m_LocalRotation: {x: -0, y: -0, z: 0.70261735, w: 0.7115679}
   m_LocalPosition: {x: 0.466, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7267439164159823526}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 7.668}
+--- !u!58 &2228694017646900464
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3958310909784842633}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.04
 --- !u!1 &4066615907566112339
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,7 +1904,7 @@ GameObject:
   - component: {fileID: 5902577570377229639}
   - component: {fileID: 2991170898635790752}
   m_Layer: 0
-  m_Name: Spider Leg Left FM
+  m_Name: Leg Left FM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1749,7 +1918,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4066615907566112339}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.9254986, w: 0.37875104}
+  m_LocalRotation: {x: 0, y: 0, z: 0.9254986, w: 0.37875116}
   m_LocalPosition: {x: 0, y: 0.060390472, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1807,7 +1976,7 @@ SpriteRenderer:
   m_SortingOrder: -55
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7fa75e3ee3964294fb2f51d3ee3bf591, type: 3}
-  m_Color: {r: 0.9921569, g: 0.043137256, b: 0, a: 1}
+  m_Color: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -1825,7 +1994,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4942513494756562946}
-  m_Layer: 0
+  - component: {fileID: 4393071524661817488}
+  m_Layer: 7
   m_Name: Effector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1840,13 +2010,49 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4476809657203239785}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.5655373, w: 0.82472277}
+  m_LocalRotation: {x: -0, y: -0, z: 0.5655352, w: 0.8247242}
   m_LocalPosition: {x: 0.354, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7510149040237624439}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &4393071524661817488
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4476809657203239785}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.04
 --- !u!1 &4571110701792022695
 GameObject:
   m_ObjectHideFlags: 0
@@ -1953,7 +2159,7 @@ GameObject:
   - component: {fileID: 988105523385287205}
   - component: {fileID: 6283141933567621713}
   m_Layer: 0
-  m_Name: SpiderLeg (1)
+  m_Name: Lower Leg Left BM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1967,7 +2173,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5049117645366046269}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7551447, w: 0.6555582}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7551449, w: 0.655558}
   m_LocalPosition: {x: 0.448, y: -0.001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2025,7 +2231,7 @@ SpriteRenderer:
   m_SortingOrder: -60
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 5438af015edc9c947ae33d1458f01d14, type: 3}
-  m_Color: {r: 0.4641509, g: 0.08669985, b: 0.3056819, a: 1}
+  m_Color: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -2184,7 +2390,7 @@ MonoBehaviour:
   - {fileID: 2149969987431841013}
   - {fileID: 5369662190261510126}
   - {fileID: 2747771164349987094}
-  timeBetweenLegs: 0.01
+  timeBetweenLegs: 0.001
 --- !u!1 &5348775724975722675
 GameObject:
   m_ObjectHideFlags: 0
@@ -2198,7 +2404,7 @@ GameObject:
   m_Layer: 0
   m_Name: R FM Solver_Target
   m_TagString: Untagged
-  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2229,10 +2435,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b92de7b95e4284ea082cfa960e4948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegAnimator
+  legId: 1
   SpeedOfMovement: 5
+  spider: {fileID: 7901656287059216256}
   bodyTarget: {fileID: 14689950483775480}
   movableTarget: {fileID: 3218699957851636730}
-  distanceThreshold: 0.6
+  distanceThreshold: 0.38
+  maxDistance: 0.7
+  maxDetachingDistance: 1.56
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 200
   Ignore: 0
   currentSolversTarget: 0
   targets:
@@ -2279,7 +2492,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7628088470863416035}
-  m_Layer: 0
+  - component: {fileID: 259622557618132533}
+  m_Layer: 7
   m_Name: Effector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2294,13 +2508,49 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5515162790601060974}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.77822167, w: 0.62798965}
+  m_LocalRotation: {x: -0, y: -0, z: 0.8093946, w: 0.5872651}
   m_LocalPosition: {x: 0.352, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6807849829461601042}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &259622557618132533
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5515162790601060974}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.04
 --- !u!1 &6003143339818418584
 GameObject:
   m_ObjectHideFlags: 0
@@ -2345,7 +2595,7 @@ GameObject:
   - component: {fileID: 7510149040237624439}
   - component: {fileID: 8159508359413685501}
   m_Layer: 0
-  m_Name: SpiderLeg (1)
+  m_Name: Lower Leg Right F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2359,7 +2609,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6281378757844284601}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.8914166, w: 0.45318478}
+  m_LocalRotation: {x: 0, y: 0, z: -0.8914156, w: 0.45318684}
   m_LocalPosition: {x: 0.376, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2417,7 +2667,7 @@ SpriteRenderer:
   m_SortingOrder: -60
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 5438af015edc9c947ae33d1458f01d14, type: 3}
-  m_Color: {r: 0.4641509, g: 0.08669985, b: 0.3056819, a: 1}
+  m_Color: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -2497,7 +2747,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4104717168356089909}
-  m_Layer: 0
+  - component: {fileID: 4655427008716736129}
+  m_Layer: 7
   m_Name: Effector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2512,13 +2763,49 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6461148323121578744}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.5470574, w: 0.83709514}
+  m_LocalRotation: {x: -0, y: -0, z: -0.5470586, w: 0.8370943}
   m_LocalPosition: {x: 0.371, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1571191712766231492}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &4655427008716736129
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6461148323121578744}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.04
 --- !u!1 &6539428192260594250
 GameObject:
   m_ObjectHideFlags: 0
@@ -2531,6 +2818,8 @@ GameObject:
   - component: {fileID: 7901656287059216256}
   - component: {fileID: 5213784119033232144}
   - component: {fileID: 3760473082309952931}
+  - component: {fileID: 6338087810323748481}
+  - component: {fileID: 8119733288362010799}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -2567,29 +2856,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::spider_script
   specie: 1
-  isAGeneral: 0
-  speed: 5
-  steeringSmooth: 0.05
-  rayDistance: 2
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 9
-  avoidanceStrength: 1.83
-  avoidanceFalloff: 1.72
-  <CohesionRadius>k__BackingField: 7
-  cohesionStrength: 0.1
-  separationRadius: 1
-  separationStrength: 1
+  speed: 10
+  GroupingComponent: {fileID: 8119733288362010799}
   group: {fileID: 0}
-  separationTime: 4
   ennemie: 1
   target: {fileID: 0}
-  refreshSpeed: 1
-  distanceToTarget: 3
+  refreshSpeed: 0.1
+  distanceToTarget: 4
   behaviour: 0
   pathColor: {r: 1, g: 0.14592034, b: 0, a: 1}
+  rigidBody: {fileID: 5213784119033232144}
+  <ColorComponent>k__BackingField: {fileID: 6338087810323748481}
   legsCoordinator: {fileID: 7529023087562121803}
   animator: {fileID: 2604547628539786783}
+  temp_layerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  legsColliders:
+  - {fileID: 4393071524661817488}
+  - {fileID: 259622557618132533}
+  - {fileID: 3813104402312230205}
+  - {fileID: 2228694017646900464}
+  - {fileID: 4655427008716736129}
+  - {fileID: 2091188329242170832}
+  - {fileID: 2980643299104596717}
+  - {fileID: 7156743403894544154}
 --- !u!50 &5213784119033232144
 Rigidbody2D:
   serializedVersion: 5
@@ -2652,7 +2943,91 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.3
+  m_Radius: 0.39
+--- !u!114 &6338087810323748481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6539428192260594250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbcc3a391cd4aa44a97cab24e8392b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  bodyPart:
+  - name: Body
+    sprite: {fileID: 7667597460917484980}
+    baseColor: {r: 0.90188676, g: 0.90188676, b: 0.90188676, a: 1}
+  - name: Leg Right F
+    sprite: {fileID: 9026737806723794409}
+    baseColor: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 1}
+  - name: Leg Right B
+    sprite: {fileID: 1191324553970424245}
+    baseColor: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 1}
+  - name: Leg Right FM
+    sprite: {fileID: 6939444548476157475}
+    baseColor: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 1}
+  - name: Leg Right BM
+    sprite: {fileID: 7797720120514799623}
+    baseColor: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 1}
+  - name: Leg Left F
+    sprite: {fileID: 2682030414286984946}
+    baseColor: {r: 0.8037735, g: 0.8037735, b: 0.8037735, a: 1}
+  - name: Leg Left B
+    sprite: {fileID: 1647147811336578385}
+    baseColor: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 1}
+  - name: Leg Left FM
+    sprite: {fileID: 2991170898635790752}
+    baseColor: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 1}
+  - name: Leg Left BM
+    sprite: {fileID: 7770103251033630408}
+    baseColor: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 1}
+  - name: Lower Leg Right F
+    sprite: {fileID: 8159508359413685501}
+    baseColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
+  - name: Lower Leg Right B
+    sprite: {fileID: 1482580494276463768}
+    baseColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
+  - name: Lower Leg Right FM
+    sprite: {fileID: 1695373077080731998}
+    baseColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
+  - name: Lower Leg Right BM
+    sprite: {fileID: 4020619289429221031}
+    baseColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
+  - name: Lower Leg Left F
+    sprite: {fileID: 6239677382407034744}
+    baseColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
+  - name: Lower Left B
+    sprite: {fileID: 3321999297443632436}
+    baseColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
+  - name: Lower Leg Left FM
+    sprite: {fileID: 8325626864587487119}
+    baseColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
+  - name: Lower Leg Left BM
+    sprite: {fileID: 6283141933567621713}
+    baseColor: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
+  blushColor: {r: 0.7584905, g: 0.17602699, b: 0.52689457, a: 1}
+--- !u!114 &8119733288362010799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6539428192260594250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32b74b473f993db4f9a0a81ce1726401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoidComponent
+  Group: {fileID: 0}
+  separationStrength: 0.42
+  seekingStrength: 1
+  cohesionStrength: 0.74
+  alignmentStrength: 0.14
+  IsLost: 0
+  lostTimer: 1
 --- !u!1 &6581710661538547376
 GameObject:
   m_ObjectHideFlags: 0
@@ -2697,7 +3072,7 @@ GameObject:
   m_Layer: 0
   m_Name: L FM Solver_Target
   m_TagString: Untagged
-  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2728,10 +3103,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b92de7b95e4284ea082cfa960e4948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegAnimator
+  legId: 5
   SpeedOfMovement: 5
+  spider: {fileID: 7901656287059216256}
   bodyTarget: {fileID: 3950874780499788435}
   movableTarget: {fileID: 8776587822420967421}
-  distanceThreshold: 0.6
+  distanceThreshold: 0.38
+  maxDistance: 0.7
+  maxDetachingDistance: 1.56
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 200
   Ignore: 0
   currentSolversTarget: 0
   targets:
@@ -2749,7 +3131,7 @@ GameObject:
   - component: {fileID: 5184278634733353646}
   - component: {fileID: 6939444548476157475}
   m_Layer: 0
-  m_Name: Spider Leg Right FM
+  m_Name: Leg Right FM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2763,7 +3145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6722569753917673542}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.23797645, w: 0.9712709}
+  m_LocalRotation: {x: 0, y: 0, z: 0.2379766, w: 0.9712709}
   m_LocalPosition: {x: 0, y: 0.060390472, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2821,7 +3203,7 @@ SpriteRenderer:
   m_SortingOrder: -55
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7fa75e3ee3964294fb2f51d3ee3bf591, type: 3}
-  m_Color: {r: 0.9921569, g: 0.043137256, b: 0, a: 1}
+  m_Color: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -2872,7 +3254,7 @@ GameObject:
   - component: {fileID: 3443145691363971399}
   - component: {fileID: 1647147811336578385}
   m_Layer: 0
-  m_Name: Spider Leg Left B
+  m_Name: Leg Left B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2886,7 +3268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6812096557553657489}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.99991715, w: -0.012871668}
+  m_LocalRotation: {x: 0, y: 0, z: 0.9993297, w: -0.03660772}
   m_LocalPosition: {x: 0, y: -0.058410645, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2944,7 +3326,7 @@ SpriteRenderer:
   m_SortingOrder: -55
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7fa75e3ee3964294fb2f51d3ee3bf591, type: 3}
-  m_Color: {r: 0.9921569, g: 0.043137256, b: 0, a: 1}
+  m_Color: {r: 0.8039216, g: 0.8039216, b: 0.8039216, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -3030,7 +3412,7 @@ GameObject:
   m_Layer: 0
   m_Name: R BM Solver_Target
   m_TagString: Untagged
-  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3061,10 +3443,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b92de7b95e4284ea082cfa960e4948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegAnimator
+  legId: 2
   SpeedOfMovement: 5
+  spider: {fileID: 7901656287059216256}
   bodyTarget: {fileID: 756293521814126587}
   movableTarget: {fileID: 3025322419699600480}
-  distanceThreshold: 0.6
+  distanceThreshold: 0.38
+  maxDistance: 0.7
+  maxDetachingDistance: 1.56
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 200
   Ignore: 0
   currentSolversTarget: 0
   targets:
@@ -3081,7 +3470,7 @@ GameObject:
   - component: {fileID: 1571191712766231492}
   - component: {fileID: 6239677382407034744}
   m_Layer: 0
-  m_Name: SpiderLeg (1)
+  m_Name: Lower Leg Left F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3095,7 +3484,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7579219308324118384}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.9033808, w: 0.42883936}
+  m_LocalRotation: {x: 0, y: 0, z: 0.90338194, w: 0.428837}
   m_LocalPosition: {x: 0.39, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3153,7 +3542,7 @@ SpriteRenderer:
   m_SortingOrder: -60
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 5438af015edc9c947ae33d1458f01d14, type: 3}
-  m_Color: {r: 0.4641509, g: 0.08669985, b: 0.3056819, a: 1}
+  m_Color: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -3268,7 +3657,7 @@ GameObject:
   - component: {fileID: 8023122285338183267}
   - component: {fileID: 3321999297443632436}
   m_Layer: 0
-  m_Name: SpiderLeg (1)
+  m_Name: Lower Left B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3282,7 +3671,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8102576475968222592}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7688318, w: 0.6394511}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7347038, w: 0.67838806}
   m_LocalPosition: {x: 0.328, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3340,7 +3729,7 @@ SpriteRenderer:
   m_SortingOrder: -60
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 5438af015edc9c947ae33d1458f01d14, type: 3}
-  m_Color: {r: 0.4641509, g: 0.08669985, b: 0.3056819, a: 1}
+  m_Color: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -3490,7 +3879,7 @@ GameObject:
   m_Layer: 0
   m_Name: L F Solver_Target
   m_TagString: Untagged
-  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3521,10 +3910,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b92de7b95e4284ea082cfa960e4948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegAnimator
+  legId: 4
   SpeedOfMovement: 5
+  spider: {fileID: 7901656287059216256}
   bodyTarget: {fileID: 6580648689698605964}
   movableTarget: {fileID: 6103988699042889046}
-  distanceThreshold: 0.6
+  distanceThreshold: 0.38
+  maxDistance: 0.7
+  maxDetachingDistance: 1.56
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 200
   Ignore: 0
   currentSolversTarget: 0
   targets:
@@ -3539,7 +3935,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1608058437322166123}
-  m_Layer: 0
+  - component: {fileID: 2091188329242170832}
+  m_Layer: 7
   m_Name: Effector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3554,13 +3951,49 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8495615142695933300}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.7769989, w: 0.62950194}
+  m_LocalRotation: {x: -0, y: -0, z: -0.75904554, w: 0.6510375}
   m_LocalPosition: {x: 0.361, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8023122285338183267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.088}
+--- !u!58 &2091188329242170832
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8495615142695933300}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.04
 --- !u!1 &8854132909790088606
 GameObject:
   m_ObjectHideFlags: 0
@@ -3603,7 +4036,7 @@ GameObject:
   - component: {fileID: 6807849829461601042}
   - component: {fileID: 1482580494276463768}
   m_Layer: 0
-  m_Name: SpiderLeg (1)
+  m_Name: Lower Leg Right B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3617,7 +4050,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8866426339580390179}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.7548916, w: 0.65584964}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7587817, w: 0.65134513}
   m_LocalPosition: {x: 0.317, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3675,10 +4108,10 @@ SpriteRenderer:
   m_SortingOrder: -60
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 5438af015edc9c947ae33d1458f01d14, type: 3}
-  m_Color: {r: 0.4641509, g: 0.08669985, b: 0.3056819, a: 1}
+  m_Color: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 2
+  m_DrawMode: 1
   m_Size: {x: 0.42, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -3728,7 +4161,7 @@ GameObject:
   m_Layer: 0
   m_Name: F BM Solver_Target
   m_TagString: Untagged
-  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3759,10 +4192,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b92de7b95e4284ea082cfa960e4948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LegAnimator
+  legId: 6
   SpeedOfMovement: 5
+  spider: {fileID: 7901656287059216256}
   bodyTarget: {fileID: 4224387133999181226}
   movableTarget: {fileID: 1941403899462123643}
-  distanceThreshold: 0.6
+  distanceThreshold: 0.38
+  maxDistance: 0.7
+  maxDetachingDistance: 1.56
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 200
   Ignore: 0
   currentSolversTarget: 0
   targets:

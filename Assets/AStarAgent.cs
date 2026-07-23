@@ -7,6 +7,8 @@ using UnityEngine.Rendering.VirtualTexturing;
 
 public class AStarAgent
 {
+    
+    
     public AStarAgent(AStarDemandsScheduler scheduler, AStarMap map)
     {
         demandsScheduler = scheduler;
@@ -15,6 +17,7 @@ public class AStarAgent
 
     private AStarMap map;
     private AStarDemandsScheduler demandsScheduler;
+    
     
     public int HeuristicFunction(Vector2Int a,Vector2Int b)
     {
@@ -42,17 +45,22 @@ public class AStarAgent
         }
 
         Node startNode = nodes[startCoords.x, startCoords.y];
-        Node goalNode = nodes[goalCoords.x, goalCoords.y];
+        map.PrepareNode(startNode.Coords);
 
-        startNode.G = 0; 
-        startNode.F = HeuristicFunction(startNode.Coords, goalNode.Coords);
+        startNode.G = 0;
+        startNode.F = HeuristicFunction(startNode.Coords, goalCoords) * W;
+        
+        
+        Node goalNode = nodes[goalCoords.x, goalCoords.y];
+        map.PrepareNode(goalNode.Coords);
+        
         openList.Add(startNode);
         openSet.Add(startNode);
 
         bool pathSuccess = false;
         int iterations = 0;
         
-        bool ghostWalk = false; //isWalkable Si on commence sur une case non marchable alors on autorise (temporairement) de NoClip
+        bool ghostWalk = !startNode.IsWalkable; //isWalkable Si on commence sur une case non marchable alors on autorise (temporairement) de NoClip
         //Cela a été fait apres avoir vu que la map pouvais avoir un degré varié de detail, ou la case est détecté non marchable alors que si
 
         if (goalNode.IsWalkable)
@@ -73,6 +81,7 @@ public class AStarAgent
                 var currentNeighbours = map.GetNeighbours(nodes, current.Coords, ghostWalk);
                 foreach (Node neighbour in currentNeighbours)
                 {
+                    map.PrepareNode(neighbour.Coords);
                     if (closedSet.Contains(neighbour))
                         continue;
 
@@ -125,7 +134,14 @@ public class AStarAgent
         }
 
         Node startNode = nodes[startCoords.x, startCoords.y];
+        map.PrepareNode(startNode.Coords);
+
+        startNode.G = 0;
+        startNode.F = HeuristicFunction(startNode.Coords, goalCoords) * W;
+        
+        
         Node goalNode = nodes[goalCoords.x, goalCoords.y];
+        map.PrepareNode(goalNode.Coords);
 
         startNode.G = 0;
         startNode.F = HeuristicFunction(startNode.Coords, goalNode.Coords);
@@ -158,17 +174,18 @@ public class AStarAgent
                 {
                     if (closedSet.Contains(neighbour))
                         continue;
+                    map.PrepareNode(neighbour.Coords);
                     
                     float tentativeGForce = current.G + Vector2Int.Distance(current.Coords, neighbour.Coords);
                     if (tentativeGForce < neighbour.G)
                     {
                         float d = distanceMap[neighbour.x, neighbour.y];
 
-                        if (d <= distance) // Permet de debug la ou le chemin de peut pas passer
+                        /*if (d <= distance) // Permet de debug la ou le chemin de peut pas passer
                         {
                             demandsScheduler.RecordStealthBlockedNode(neighbour.RealCoords);
                             continue; // Skip la case ou l'on est trop proche d'un ennemie
-                        }
+                        }*/
                         
                         float avoidancePenalty = d <= distance*1.5f ? 40 : 0; // Pénalité de raprochement, on prefere etre au plus loin des ennemies
 
@@ -236,7 +253,7 @@ public class AStarAgent
                 angleDiff = 2f * Mathf.PI - angleDiff;
             
             //Ajoute un point si l'angle est trop grand
-            bool significantAngleChange = angleDiff > MathF.PI/6; // ~5.7 degrees
+            bool significantAngleChange = angleDiff > MathF.PI/3; // ~5.7 degrees
             bool pathNotWalkable = !IsPathWalkable(path[lastAddedIndex].Coords, path[i].Coords, nodes);
             
             if (significantAngleChange || pathNotWalkable) {
@@ -377,12 +394,13 @@ public class Node : IEquatable<Node>
     
     public bool IsWalkable
     {
-        get { return Walkable >= 0; }
+        get { return Walkable != -1; }
     }
     
     public int Walkable;
 
     public Node Parent;
+    public int LastSearchId;
     public bool Equals(Node other)
     {
         return Coords.Equals(other.Coords);

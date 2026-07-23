@@ -13,23 +13,18 @@ public class LegsCoordinator : MonoBehaviour
     private float timeBetweenLegs;
 
     private float counter;
+    
 
-    private void Start()
-    {
-        timeBetweenLegs += Random.Range(-timeBetweenLegs/2, timeBetweenLegs/2);
-    }
-
-    private void Update()
+    public void UpdateAnimation(float speed)
     {
         if (counter < timeBetweenLegs)
         {
             counter += Time.deltaTime;
-
         }
         else
         {
             counter = 0;
-            legs[curentIndex].Animate();
+            legs[curentIndex].Animate(speed);
             curentIndex = (curentIndex + 1) % legs.Length;
         }
         
